@@ -1,0 +1,8 @@
+.UserInput {
+    margin: 1rem;
+}
+
+.UserInput input {
+    border-radius: 4px;
+    padding: 0.25rem;
+}
