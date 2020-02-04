@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 import classes from './App.css';
 
@@ -15,7 +16,7 @@ class App extends Component {
     }
 
     nameChangeHandler = (event, id) => {
-        const personIndex = this.state.persons.findIndex(person => person.id === id);
+        const personIndex = this.state.persons.findIndex(person => person.userid === id);
         const person = {
             ...this.state.persons[personIndex]
         };
@@ -48,13 +49,14 @@ class App extends Component {
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
-                        return <Person
-                            key={person.id}
-                            click={() => this.deletePersonHandler(index)}
-                            name={person.name} 
-                            age={person.age} 
-                            changed={(event) => this.nameChangeHandler(event, person.id)}
-                        />
+                        return <ErrorBoundary key={person.id}>
+                            <Person
+                                click={() => this.deletePersonHandler(index)}
+                                name={person.name} 
+                                age={person.age} 
+                                changed={(event) => this.nameChangeHandler(event, person.id)}
+                            />
+                        </ErrorBoundary>
                     })}
                 </div>
             );
@@ -76,7 +78,7 @@ class App extends Component {
             <div className={classes.App}>
                 <h1>Hello, World!</h1>
                 <p className={assignedClasses.join(' ')}>That's it</p>
-                <button className={btnClass} showPersons={this.state.showPersons} onClick={this.togglePersonHandler}>
+                <button className={btnClass} onClick={this.togglePersonHandler}>
                     Toggle Person
                 </button>
                 {persons}
