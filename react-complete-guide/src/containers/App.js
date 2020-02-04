@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 import classes from './App.css';
 
@@ -14,7 +15,7 @@ class App extends Component {
     }
 
     nameChangeHandler = (event, id) => {
-        const personIndex = this.state.persons.findIndex(person => person.userid === id);
+        const personIndex = this.state.persons.findIndex(person => person.id === id);
         const person = {
             ...this.state.persons[personIndex]
         };
@@ -41,39 +42,22 @@ class App extends Component {
 
     render() {
         let persons = null;
-        let btnClass = '';
 
         if(this.state.showPersons) {
-            persons = (
-                <div>
-                    <Persons
-                        persons={this.state.persons} 
-                        clicked={this.deletePersonHandler} 
-                        changed={this.nameChangeHandler}
-                    />
-                </div>
-            );
-
-            btnClass = classes.Red;
-        }
-
-        const assignedClasses = [];
-
-        if(this.state.persons.length <= 2) {
-            assignedClasses.push(classes.red);
-        }
-
-        if(this.state.persons.length <= 1) {
-            assignedClasses.push(classes.bold);
+            persons = <Persons
+                persons={this.state.persons} 
+                clicked={this.deletePersonHandler} 
+                changed={this.nameChangeHandler}
+            />;
         }
 
         return (
             <div className={classes.App}>
-                <h1>Hello, World!</h1>
-                <p className={assignedClasses.join(' ')}>That's it</p>
-                <button className={btnClass} onClick={this.togglePersonHandler}>
-                    Toggle Person
-                </button>
+                <Cockpit 
+                    showPersons={this.state.showPersons}
+                    personsLength={this.state.persons.length}
+                    clicked={this.togglePersonHandler}
+                />
                 {persons}
             </div>
         );
