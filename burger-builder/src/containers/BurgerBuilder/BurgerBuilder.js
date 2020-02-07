@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import Burguer from '../../components/Burger/Burger';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
 class BurguerBuilder extends Component {
     state = {
@@ -16,7 +17,7 @@ class BurguerBuilder extends Component {
         return (
             <Fragment>
                <Burguer ingredients={this.state.ingredients} />
-               <div>Build Controls</div>
+               <BuildControls />
             </Fragment>
         );
     }
