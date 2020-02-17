@@ -78,7 +78,7 @@ class BurgerBuilder extends Component {
                         price={this.props.price}
                         purchasable={this.isPurchasable(this.props.ings)}
                         ordered={this.purchaseHandler}
-                        idAuth={this.props.isAuth}
+                        isAuth={this.props.isAuth}
                     />
                 </Fragment>
             );
