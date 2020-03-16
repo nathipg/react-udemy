@@ -7,10 +7,13 @@ const IngredientForm = React.memo(props => {
     const [inputTitle, setInputTitle] = useState('');
     const [inputAmount, setInputAmount] = useState('');
 
-  const submitHandler = event => {
-    event.preventDefault();
-    // ...
-  };
+    const submitHandler = event => {
+        event.preventDefault();
+        props.onAddIngredient({
+            title: inputTitle,
+            amount: inputAmount
+        });
+    };
 
   return (
     <section className="ingredient-form">
